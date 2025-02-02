@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Pong WebSocket Test</title>
+</head>
+<body>
+    <h1>Pong WebSocket Test</h1>
+    <button onclick="connectWebSocket()">Connect to WebSocket</button>
+    <div id="output"></div>
+
+    <script>
+        function connectWebSocket() {
+            const socket = new WebSocket('wss://pong-8c5h.onrender.com');
+
+            socket.onopen = () => {
+                document.getElementById('output').innerText = 'Connected to WebSocket!';
+                console.log('Connected');
+            };
+
+            socket.onmessage = (event) => {
+                console.log('Message from server:', event.data);
+            };
+
+            socket.onerror = (error) => {
+                console.error('WebSocket error:', error);
+            };
+
+            socket.onclose = () => {
+                console.log('WebSocket connection closed');
+            };
+        }
+    </script>
+</body>
+</html>
